@@ -1,0 +1,12 @@
+{
+  "type": "code",
+  "name": "PushShip",
+  "modid": "pushship",
+  "version": "1.0.4",
+  "networkVersion": "1.0.4",
+  "description": "Push boats from the clicked side with Ctrl+right-click or /pushship; use /pushship fix to resync a stuck boat.",
+  "authors": ["Jimmy"],
+  "side": "Server",
+  "requiredOnClient": false,
+  "requiredOnServer": true
+}

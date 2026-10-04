@@ -1,0 +1,47 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <AssemblyName>PushShip</AssemblyName>
+    <RootNamespace>PushShip</RootNamespace>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <!-- ปิดไม่ให้ก็อปปี้ dll ของเกมไปแพ็คในโมด (โฟลเดอร์เกมมีให้อยู่แล้ว) -->
+    <CopyLocalLockFileAssemblies>false</CopyLocalLockFileAssemblies>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      ต้องตั้ง environment variable ชื่อ VINTAGE_STORY
+      ให้ชี้ไปที่โฟลเดอร์ที่ติดตั้งเกม (โฟลเดอร์ที่มีไฟล์ VintagestoryAPI.dll อยู่)
+      Windows: มักจะเป็น C:\Users\<ชื่อ>\AppData\Roaming\Vintagestory
+      Linux:   มักจะเป็น /usr/share/vintagestory หรือโฟลเดอร์ที่แตกไฟล์เกมไว้
+    -->
+    <Reference Include="VintagestoryAPI">
+      <HintPath>$(VINTAGE_STORY)\VintagestoryAPI.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VintagestoryLib">
+      <HintPath>$(VINTAGE_STORY)\VintagestoryLib.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VSEssentials">
+      <HintPath>$(VINTAGE_STORY)\Mods\VSEssentials.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="VSSurvivalMod">
+      <HintPath>$(VINTAGE_STORY)\Mods\VSSurvivalMod.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(VINTAGE_STORY)\Lib\Newtonsoft.Json.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- หลัง build เสร็จ ก็อปปี้ modinfo.json ไปไว้ข้าง dll เพื่อให้แพ็คเป็นโมดได้ง่าย -->
+  <Target Name="CopyModInfo" AfterTargets="Build">
+    <Copy SourceFiles="modinfo.json" DestinationFolder="$(OutDir)" />
+  </Target>
+
+</Project>
